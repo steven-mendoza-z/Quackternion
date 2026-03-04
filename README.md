@@ -3,6 +3,9 @@
 
 Quackternion is a 3D simulation platform for applying and visualizing spatial transformations using quaternions. The system focuses on mathematically correct modeling of rotations and reference frames, providing real-time client-side interaction while generating deterministic, backend-authored exports (PDF/LaTeX).
 
+Quackternion helps engineers and students understand, apply, and verify 3D spatial transformations by combining interactive visualization with mathematically explicit, reproducible exports.
+
+
 <div align="center" display="flex">
   <img src="documentation/scene.jpg" width="400"> <img src="documentation/scene2.jpg" width="400">
 </div>
@@ -13,7 +16,7 @@ Quackternion is a 3D simulation platform for applying and visualizing spatial tr
 - [Problem & Motivation](#problem--motivation)
 - [System Architecture](#system-architecture)
 - [Workflow](#workflow)
-- [Key Features](#key-features)
+- [Key Features](#requirements)
 - [Stack](#stack)
 - [Design Decisions](#design-decisions)
 - [Deployment](#deployment)
@@ -68,20 +71,33 @@ Detailed system, infrastructure, and container diagrams are included below.
    (PDF exposed in the UI, PDF/LaTeX supported by the API).
 
 
-## Key Features
+## Requirements
 
-- Create and edit 3D objects with configurable reference frames
-- Apply translation and rotation transformations using:
-  - Quaternions (current)
-  - Homogeneous matrices (planned)
-- Real-time client-side simulation (Three.js) for low-latency interaction
-- Backend-driven export pipeline:
-  - Validates the scene payload
-  - Recomputes transformations deterministically
-  - Generates reproducible export artifacts
-- One-click PDF export available directly from the UI
-- Backend API supports both **PDF** and **LaTeX** export formats
-- API documentation available via Swagger / Redoc (drf-spectacular)
+### Functional Requirements
+
+These requirements describe **what the system does**.
+
+- The system shall allow users to create and edit 3D objects with explicit reference frames.
+- The system shall support translation and rotation transformations using quaternions.
+- The system shall display real-time visual feedback of object position, orientation, and quaternion values.
+- The system shall allow chaining multiple transformations in a deterministic order.
+- The system shall generate the full mathematical procedure associated with a scene.
+- The system shall export the transformation procedure as a PDF via the user interface.
+- The system shall support exporting the procedure as a LaTeX document through the backend API.
+- The system shall recompute all transformations on the backend using a complete scene snapshot.
+
+---
+
+### Non-Functional Requirements
+
+These requirements describe **how the system behaves**.
+
+- Deterministic behavior: identical inputs shall always produce identical outputs.
+- Reproducibility: exported documents shall be independent of client-side execution or environment.
+- Clear separation of concerns between visualization (frontend) and authoritative computation (backend).
+- Low-latency interaction through client-side 3D rendering.
+- Environment-independent document generation using containerized LaTeX tooling.
+- Reproducible deployments across environments using Docker and Docker Compose and automated deployment via CI/CD pipelines.
 
 
 ## Stack
@@ -183,11 +199,11 @@ models and extended support for homogeneous matrix-based workflows.
 <div align="center">
 </div> -->
 
-### Container Diagram (C4 Model - Level 2)
+<!-- ### Container Diagram (C4 Model - Level 2)
 
 <div align="center">
   <img src="documentation/containers_diagram.png"><br>
-</div>
+</div> -->
 
 <!-- ### Procedure Sequence
 <div align="center">
@@ -203,10 +219,10 @@ models and extended support for homogeneous matrix-based workflows.
   <img src="documentation/classes_diagram.jpg" width="600">
 </div>
 
-### CI/CD Pipelines
+<!-- ### CI/CD Pipelines
 
 <div align="center">
   <img src="documentation/cicd_pipelines.png"><br>
-</div>
+</div> -->
 
 
